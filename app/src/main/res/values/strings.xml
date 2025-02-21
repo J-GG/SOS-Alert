@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name" translatable="false">SOS Alert</string>
+    <string name="cancel">Cancel</string>
+    <string name="add">Add</string>
+    <string name="delete">Delete</string>
+    <string name="ok">Ok</string>
+    <string name="navigation.home.top_bar.title" translatable="false">SOS Alert</string>
+    <string name="navigation.contacts.top_bar.title">Contacts</string>
+    <string name="navigation.settings.top_bar.title">Settings</string>
+    <string name="navigation.home.bottom_bar.title">Home</string>
+    <string name="navigation.contacts.bottom_bar.title">Contacts</string>
+    <string name="navigation.settings.bottom_bar.title">Settings</string>
+    <string name="permission_required.title">Permission required</string>
+    <string name="permission_required.location.content">Location access is needed to send alerts with your location. Please go to your settings to allow this app to access your location.</string>
+    <string name="permission_required.sms.content">SMS permission is required to send alerts to your contacts. Please go to your settings to allow this app to send SMS messages.</string>
+    <string name="home.press_and_hold_to_send_alert">Press and hold the button for %1$d seconds to send an alert to your contacts</string>
+    <string name="home.press_to_send_alert">Press the button to send an alert to your contacts</string>
+    <string name="home.alert_sent">%1$d contacts have been notified!</string>
+    <string name="contacts.empty">No contacts yet</string>
+    <string name="contacts.tap_to_add.beginning">Tap&#160;</string>
+    <string name="contacts.tap_to_add.icon_placeholder">Add contact</string>
+    <string name="contacts.tap_to_add.end">&#160;to add emergency contacts.</string>
+    <string name="contacts.fab">Add contact</string>
+    <string name="contacts.create.dialog.title">Create contact</string>
+    <string name="contacts.create.dialog.name.label">Name</string>
+    <string name="contacts.create.dialog.name.error.blank">Name can\'t be blank</string>
+    <string name="contacts.create.dialog.phone_number.label">Phone number</string>
+    <string name="contacts.create.dialog.phone_number.error.blank">Phone number can\'t be blank</string>
+    <string name="contacts.create.dialog.phone_number.error.format">Phone number is invalid</string>
+    <string name="contacts.create.dialog.name">Name</string>
+    <string name="contacts.fab.create_account">Create contact</string>
+    <string name="contacts.fab.import_account">Import contacts</string>
+    <string name="contacts.search.placeholder">John Doe, 1–212-456-7890...</string>
+    <string name="contacts.search.clear">Clear the search</string>
+    <string name="contacts.delete_icon_description">Delete contact</string>
+    <string name="contacts.delete.dialog.title">Delete contact</string>
+    <string name="contacts.delete.dialog.text.beginning">Are you sure you want to delete&#160;</string>
+    <string name="contacts.delete.dialog.text.end">&#160;from your contacts?</string>
+    <string name="settings.press_hold_to_send_alert">Press and hold for 3 seconds before sending the alert</string>
+    <string name="settings.include_location">Include your location in the alert</string>
+    <string name="settings.message_content">Content of the alert sent to your contacts</string>
+    <string name="settings.default_message_content">I need help !</string>
+</resources>
