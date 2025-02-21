@@ -68,7 +68,6 @@ fun Home(
     val isPressAndHoldToSendAlert by viewModel.isPressAndHoldToSendAlert.collectAsState(true)
     val pressDuration = if (isPressAndHoldToSendAlert) 3 else 0
     var showPermissionRequiredMessage by rememberSaveable { mutableStateOf(false) }
-    var showAlertSent by rememberSaveable { mutableStateOf(false) }
     val snackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
 
@@ -92,7 +91,7 @@ fun Home(
                         viewModel.totalSentAlerts
                     )
                 )
-                showAlertSent = true
+                viewModel.resetSentAlerts()
             }
         }
     }

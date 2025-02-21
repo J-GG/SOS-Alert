@@ -60,7 +60,7 @@ class HomeViewModel(
         }
     }
 
-    private fun resetSentAlerts() {
+    fun resetSentAlerts() {
         isAlertSent = false
         totalSentAlerts = 0
     }
