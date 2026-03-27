@@ -13,7 +13,7 @@
     <string name="settings.default_message_content">J\'ai besoin d\'aide !</string>
     <string name="permission_required.location.content">L\'accès à la localisation est nécessaire pour envoyer des alertes avec votre position. Veuillez vous rendre dans vos paramètres pour autoriser cette application à accéder à votre localisation.</string>
     <string name="permission_required.sms.content">L\'autorisation SMS est requise pour envoyer des alertes à vos contacts. Veuillez aller dans vos paramètres pour permettre à cette application d\'envoyer des messages SMS.</string>
-    <string name="home.press_and_hold_to_send_alert">Restez appuyé sur le bouton pendant %1$d secondes pour envoyer une alerte à vos contacts</string>
+    <string name="home.press_and_hold_to_send_alert">Maintenez le bouton pendant %1$d secondes pour envoyer une alerte à vos contacts</string>
     <string name="home.press_to_send_alert">Appuyez sur le bouton pour envoyer une alerte à vos contacts</string>
     <string name="home.alert_sent">"%1$d contacts ont été notifiés ! "</string>
     <string name="contacts.fab">Ajouter un contact</string>
@@ -30,11 +30,11 @@
     <string name="contacts.search.clear">Effacer la recherche</string>
     <string name="contacts.delete_icon_description">Supprimer un contact</string>
     <string name="contacts.delete.dialog.title">Supprimer un contact</string>
-    <string name="contacts.delete.dialog.text.beginning">Êtes vous sûr de vouloir supprimer&#160;</string>
+    <string name="contacts.delete.dialog.text.beginning">Êtes-vous sûr de vouloir supprimer&#160;</string>
     <string name="contacts.delete.dialog.text.end">&#160;de vos contacts ?</string>
     <string name="settings.press_hold_to_send_alert">Appuyez et maintenez pendant 3 secondes avant d\'envoyer l\'alerte</string>
     <string name="settings.include_location">Inclure votre position dans l\'alerte</string>
-    <string name="settings.message_content">Contenu de l\'alerte envoyé à vos contacts</string>
+    <string name="settings.message_content">Contenu de l\'alerte envoyée à vos contacts</string>
     <string name="contacts.empty">Aucun contact</string>
     <string name="contacts.tap_to_add.beginning">Cliquez sur&#160;</string>
     <string name="contacts.tap_to_add.icon_placeholder">Ajouter contact</string>
