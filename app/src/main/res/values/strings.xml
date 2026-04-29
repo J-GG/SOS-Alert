@@ -40,4 +40,10 @@
     <string name="settings.include_location">Include your location in the alert</string>
     <string name="settings.message_content">Content of the alert sent to your contacts</string>
     <string name="settings.default_message_content">I need help !</string>
+    <string name="widget.description">Send an SOS alert to your contacts</string>
+    <string name="widget.button" translatable="false">SOS</string>
+    <string name="widget.permission_required">SMS permission required. Tap to open the app.</string>
+    <string name="notification.channel_name">SOS Alert</string>
+    <string name="notification.alert_title">Alert sent</string>
+    <string name="notification.alert_text">%1$d contacts have been notified</string>
 </resources>

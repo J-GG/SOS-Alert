@@ -16,6 +16,7 @@ interface AppContainer {
     val userSettingsRepository: UserSettingsRepository
     val smsRepository: SmsRepository
     val locationRepository: LocationRepository
+    val sendAlertUseCase: SendAlertUseCase
 }
 
 private const val USER_SETTINGS_PREFERENCES_NAME = "user_settings_preferences"
@@ -39,5 +40,9 @@ class AppDataContainer(private val context: Context) : AppContainer {
 
     override val locationRepository: LocationRepository by lazy {
         LocationRepositoryImpl(context)
+    }
+
+    override val sendAlertUseCase: SendAlertUseCase by lazy {
+        SendAlertUseCase(contactRepository, userSettingsRepository, smsRepository, locationRepository)
     }
 }

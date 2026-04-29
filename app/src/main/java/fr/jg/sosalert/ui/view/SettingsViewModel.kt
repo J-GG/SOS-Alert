@@ -5,29 +5,37 @@ import androidx.lifecycle.viewModelScope
 import fr.jg.sosalert.data.LocationRepository
 import fr.jg.sosalert.data.UserSettingsRepository
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+
+data class SettingsUiState(
+    val isPressAndHold: Boolean,
+    val isSendLocation: Boolean,
+    val messageContent: String
+)
 
 class SettingsViewModel(
     private val userSettingsRepository: UserSettingsRepository,
     private val locationRepository: LocationRepository
 ) : ViewModel() {
 
-    val isPressAndHold = userSettingsRepository.isPressAndHold.stateIn(
+    val uiState: StateFlow<SettingsUiState?> = combine(
+        userSettingsRepository.isPressAndHold,
+        userSettingsRepository.isSendLocation,
+        userSettingsRepository.messageContent
+    ) { isPressAndHold, isSendLocation, messageContent ->
+        SettingsUiState(
+            isPressAndHold = isPressAndHold,
+            isSendLocation = isSendLocation,
+            messageContent = messageContent ?: ""
+        )
+    }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000),
-        initialValue = runBlocking { userSettingsRepository.isPressAndHold.first() }
+        initialValue = null
     )
-
-    val isSendLocation = userSettingsRepository.isSendLocation.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(5_000),
-        initialValue = runBlocking { userSettingsRepository.isSendLocation.first() }
-    )
-
-    val messageContent = runBlocking { userSettingsRepository.messageContent.first() }
 
     fun hasLocationPermission(): Boolean {
         return locationRepository.hasLocationPermission()

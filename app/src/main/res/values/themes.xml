@@ -2,4 +2,10 @@
 <resources>
 
     <style name="Theme.SOSAlert" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <style name="Theme.SOSAlert.Transparent" parent="Theme.SOSAlert">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
 </resources>

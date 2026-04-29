@@ -18,10 +18,9 @@ object AppViewModelProvider {
         }
         initializer {
             HomeViewModel(
-                sosAlertApplication().container.contactRepository,
                 sosAlertApplication().container.userSettingsRepository,
                 sosAlertApplication().container.smsRepository,
-                sosAlertApplication().container.locationRepository,
+                sosAlertApplication().container.sendAlertUseCase,
             )
         }
         initializer {

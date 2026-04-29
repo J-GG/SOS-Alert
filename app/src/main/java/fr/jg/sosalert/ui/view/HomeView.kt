@@ -30,13 +30,11 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -50,7 +48,6 @@ import fr.jg.sosalert.R
 import fr.jg.sosalert.ui.AppViewModelProvider
 import fr.jg.sosalert.ui.navigation.NavigationDestination
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 object HomeDestination : NavigationDestination {
     override val route = "home"
@@ -64,13 +61,11 @@ fun Home(
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
-    val context = LocalContext.current
+    val alertSentMessage = stringResource(R.string.home_alert_sent)
     val isPressAndHoldToSendAlert by viewModel.isPressAndHoldToSendAlert.collectAsState(true)
     val pressDuration = if (isPressAndHoldToSendAlert) 3 else 0
     var showPermissionRequiredMessage by rememberSaveable { mutableStateOf(false) }
     val snackbarHostState = remember { SnackbarHostState() }
-    val coroutineScope = rememberCoroutineScope()
-
 
     val smsPermissionLauncher =
         rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
@@ -82,17 +77,11 @@ fun Home(
             }
         }
 
-    LaunchedEffect(viewModel.isAlertSent) {
-        if (viewModel.isAlertSent) {
-            coroutineScope.launch {
-                snackbarHostState.showSnackbar(
-                    context.getString(
-                        R.string.home_alert_sent,
-                        viewModel.totalSentAlerts
-                    )
-                )
-                viewModel.resetSentAlerts()
-            }
+    LaunchedEffect(Unit) {
+        viewModel.alertSentEvent.collect { totalSent ->
+            snackbarHostState.showSnackbar(
+                String.format(alertSentMessage, totalSent)
+            )
         }
     }
 

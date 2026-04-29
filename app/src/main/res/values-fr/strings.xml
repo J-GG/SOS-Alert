@@ -39,4 +39,9 @@
     <string name="contacts.tap_to_add.beginning">Cliquez sur&#160;</string>
     <string name="contacts.tap_to_add.icon_placeholder">Ajouter contact</string>
     <string name="contacts.tap_to_add.end">&#160;pour ajouter des contacts d\'urgence.</string>
+    <string name="widget.description">Envoyer une alerte SOS à vos contacts</string>
+    <string name="widget.permission_required">Permission SMS requise. Appuyez pour ouvrir l\'application.</string>
+    <string name="notification.channel_name">SOS Alert</string>
+    <string name="notification.alert_title">Alerte envoyée</string>
+    <string name="notification.alert_text">%1$d contacts ont été notifiés</string>
 </resources>

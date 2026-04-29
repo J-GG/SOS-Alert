@@ -45,15 +45,11 @@ fun Settings(
     modifier: Modifier = Modifier,
     viewModel: SettingsViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
+    val uiState by viewModel.uiState.collectAsState()
     val scrollState = rememberScrollState()
     val defaultMessageContent = stringResource(R.string.settings_default_message_content)
-    val isPressAndHold by viewModel.isPressAndHold.collectAsState()
-    val isSendLocation by viewModel.isSendLocation.collectAsState()
-    var messageContent by rememberSaveable {
-        mutableStateOf(
-            viewModel.messageContent ?: defaultMessageContent
-        )
-    }
+    var messageContent by rememberSaveable { mutableStateOf("") }
+    var messageInitialized by rememberSaveable { mutableStateOf(false) }
     var showPermissionRequiredMessage by rememberSaveable { mutableStateOf(false) }
 
     val locationPermissionLauncher =
@@ -65,27 +61,35 @@ fun Settings(
             }
         }
 
+    LaunchedEffect(uiState) {
+        if (!messageInitialized && uiState != null) {
+            messageContent = uiState!!.messageContent.ifEmpty { defaultMessageContent }
+            messageInitialized = true
+        }
+    }
+
     LaunchedEffect(messageContent) {
         kotlinx.coroutines.delay(500)
-        viewModel.updateMessageContent(messageContent)
+        if (messageInitialized) {
+            viewModel.updateMessageContent(messageContent)
+        }
     }
+
+    if (uiState == null) return
 
     Column(
         modifier = modifier
             .padding(16.dp)
             .verticalScroll(scrollState)
     ) {
-
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
                 text = stringResource(R.string.settings_press_hold_to_send_alert),
                 modifier = Modifier.weight(1f)
             )
             Switch(
-                checked = isPressAndHold,
-                onCheckedChange = {
-                    viewModel.updateIsPressAndHold(it)
-                },
+                checked = uiState!!.isPressAndHold,
+                onCheckedChange = { viewModel.updateIsPressAndHold(it) },
                 modifier = Modifier.padding(4.dp),
             )
         }
@@ -96,7 +100,7 @@ fun Settings(
                 modifier = Modifier.weight(1f)
             )
             Switch(
-                checked = isSendLocation,
+                checked = uiState!!.isSendLocation,
                 onCheckedChange = {
                     showPermissionRequiredMessage = false
                     if (!it) {
@@ -115,7 +119,7 @@ fun Settings(
 
         Text(text = stringResource(R.string.settings_message_content))
         TextField(
-            value = messageContent ?: "",
+            value = messageContent,
             minLines = 3,
             maxLines = 5,
             onValueChange = { messageContent = it },
@@ -123,8 +127,8 @@ fun Settings(
                 .fillMaxWidth()
                 .padding(4.dp)
                 .onFocusChanged { focusState ->
-                    if (!focusState.isFocused && messageContent != null) {
-                        viewModel.updateMessageContent(messageContent ?: "")
+                    if (!focusState.isFocused && messageInitialized) {
+                        viewModel.updateMessageContent(messageContent)
                     }
                 },
             keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences)
@@ -132,9 +136,7 @@ fun Settings(
 
         if (showPermissionRequiredMessage) {
             PermissionRequiredDialog(
-                onConfirmation = {
-                    showPermissionRequiredMessage = false
-                },
+                onConfirmation = { showPermissionRequiredMessage = false },
                 content = R.string.permission_required_location_content
             )
         }
