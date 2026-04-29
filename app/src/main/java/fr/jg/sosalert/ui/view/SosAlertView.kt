@@ -16,7 +16,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -91,7 +90,6 @@ private fun SosAlertBottomBar(
     onTabPressed: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val context = LocalContext.current
     val hierarchyRoutes =
         currentDestination?.hierarchy?.mapNotNull { it.route }?.toList() ?: emptyList()
 
@@ -114,7 +112,7 @@ private fun SosAlertBottomBar(
                 },
                 label = {
                     Text(
-                        text = context.getString(navItem.bottomBarTitle),
+                        text = stringResource(navItem.bottomBarTitle),
                     )
                 }
             )

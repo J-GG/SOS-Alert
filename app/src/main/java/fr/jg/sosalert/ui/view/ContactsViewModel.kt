@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import fr.jg.sosalert.R
 import fr.jg.sosalert.data.ContactRepository
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -28,6 +29,8 @@ class ContactsViewModel(private val contactRepository: ContactRepository) : View
             initialValue = null
         )
 
+    private var searchJob: Job? = null
+
     private val _filteredContacts = MutableStateFlow<List<Contact>>(emptyList())
     val filteredContacts: StateFlow<List<Contact>> = _filteredContacts.asStateFlow()
 
@@ -44,13 +47,13 @@ class ContactsViewModel(private val contactRepository: ContactRepository) : View
     }
 
     private fun updateFilteredContacts(searchQuery: String) {
-        viewModelScope.launch {
+        searchJob?.cancel()
+        searchJob = viewModelScope.launch {
             contactRepository.getFilteredContacts(searchQuery)
                 .distinctUntilChanged()
                 .collect { contacts ->
                     _filteredContacts.value = contacts
                 }
-
         }
     }
 

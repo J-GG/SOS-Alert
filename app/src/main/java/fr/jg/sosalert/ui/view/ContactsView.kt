@@ -123,15 +123,17 @@ fun Contacts(
             )
         }
     ) { innerPadding ->
-        if (allContacts != null) {
-            if (allContacts!!.isEmpty()) {
-                EmptyContactList()
-            } else {
-                ContactListAndSearchBar(
-                    onUpdateContactSearch = { viewModel.updateContactSearch(it) },
-                    onDeleteContact = { viewModel.deleteContact(it) },
-                    contacts = filteredContacts
-                )
+        Box(modifier = Modifier.padding(innerPadding)) {
+            if (allContacts != null) {
+                if (allContacts!!.isEmpty()) {
+                    EmptyContactList()
+                } else {
+                    ContactListAndSearchBar(
+                        onUpdateContactSearch = { viewModel.updateContactSearch(it) },
+                        onDeleteContact = { viewModel.deleteContact(it) },
+                        contacts = filteredContacts
+                    )
+                }
             }
         }
     }
